@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>MikihoWEB – Mini hra</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #141414, #2c2c54);
+        color: white;
+        min-height: 100vh;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+        position: fixed;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 600px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 20px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        z-index: 1000;
+    }
+
+    .navbar a, .navbar span {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    .logo {
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    /* ===== GAME ===== */
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding-top: 80px;
+    }
+
+    .game {
+        background: rgba(0,0,0,0.6);
+        padding: 25px;
+        border-radius: 15px;
+        width: 340px;
+        text-align: center;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin: 6px 0;
+        border: none;
+        border-radius: 10px;
+        background: #4e6cff;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #6f88ff;
+    }
+
+    .inv {
+        margin-top: 10px;
+        font-size: 13px;
+        color: #ccc;
+    }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="Mikihoweb.html">🏠 Domů</a>
+    <!-- LOGO = RESET HRY -->
+    <span class="logo" onclick="resetFromNavbar()">MikihoWEB</span>
+</div>
+
+<!-- GAME -->
+<div class="container">
+    <div class="game" id="game"></div>
+</div>
+
+<script>
+let inventory = [];
+
+function render(title, text, buttons) {
+    let html = `<h2>${title}</h2><p>${text}</p>`;
+    buttons.forEach(b => {
+        html += `<button onclick="${b.action}">${b.text}</button>`;
+    });
+    html += `<div class="inv">🎒 Inventář: ${inventory.join(", ") || "prázdný"}</div>`;
+    document.getElementById("game").innerHTML = html;
+}
+
+/* ===== RESETY ===== */
+function startGame() {
+    inventory = [];
+    forest();
+}
+
+function resetFromNavbar() {
+    inventory = [];
+    home();
+}
+
+/* ===== OBRAZOVKY ===== */
+function home() {
+    render("🏠 HOME", "Vyber co chceš dělat:", [
+        { text: "▶ Začít hru (RESET)", action: "startGame()" },
+        { text: "🎒 Inventář", action: "inv()" }
+    ]);
+}
+
+function forest() {
+    render("🌲 Les", "Jsi v lese.", [
+        { text: "🕳 Jeskyně", action: "cave()" },
+        { text: "➡ Cesta", action: "road()" }
+    ]);
+}
+
+function cave() {
+    if (!inventory.includes("Meč")) inventory.push("Meč");
+    render("🕳 Jeskyně", "Našel jsi MEČ ⚔", [
+        { text: "⬅ Zpět", action: "forest()" }
+    ]);
+}
+
+function road() {
+    render("🐺 Vlci", "Napadli tě vlci!", [
+        { text: "⚔ Bojovat", action: "fight()" },
+        { text: "🏃 Utéct", action: "forest()" }
+    ]);
+}
+
+function fight() {
+    if (inventory.includes("Meč")) {
+        render("🎉 Výhra", "Vyhrál jsi!", [
+            { text: "🔁 Hrát znovu", action: "startGame()" }
+        ]);
+    } else {
+        render("💀 Prohra", "Nemáš zbraň.", [
+            { text: "🔁 Zkusit znovu", action: "startGame()" }
+        ]);
+    }
+}
+
+function inv() {
+    render("🎒 Inventář", "Tohle máš u sebe:", [
+        { text: "⬅ Zpět", action: "home()" }
+    ]);
+}
+
+/* START */
+home();
+</script>
+
+</body>
+</html>
