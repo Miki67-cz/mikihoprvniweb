@@ -46,6 +46,18 @@
         letter-spacing: 1px;
     }
 
+    /* ===== TLAČÍTKO DOMŮ ===== */
+    .home-button {
+        transition: all 0.3s ease;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+
+    .home-button:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        color: #ffffffcc;
+    }
+
     /* ===== GAME ===== */
     .container {
         display: flex;
@@ -73,6 +85,7 @@
         color: white;
         font-size: 15px;
         cursor: pointer;
+        transition: background 0.2s;
     }
 
     button:hover {
@@ -90,7 +103,7 @@
 
 <!-- NAVBAR -->
 <div class="navbar">
-    <a href="Mikihoweb.html">🏠 Domů</a>
+    <a href="index.html" class="home-button">🏠 Domů</a>
     <!-- LOGO = RESET HRY -->
     <span class="logo" onclick="resetFromNavbar()">MikihoWEB</span>
 </div>
