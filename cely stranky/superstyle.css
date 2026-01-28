@@ -79,7 +79,7 @@ main {
     filter: brightness(1.2);
 }
 
-/* OBRAZKY – STEJNÝ STYL */
+/* OBRAZKY */
 .main-img {
     width: 315px;
     border-radius: 15px;
@@ -98,8 +98,12 @@ main {
 footer {
     background: #696868;
     color: white;
-    padding: 15px;
+    padding: 25px 15px;
     text-align: center;
+}
+
+.footer-links {
+    margin-bottom: 20px;
 }
 
 .footer-links a {
@@ -110,4 +114,35 @@ footer {
 
 .footer-links a:hover {
     text-decoration: underline;
+}
+
+/* NADPIS SLEDUJ NÁS */
+.follow-title {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+/* SOCIAL IKONY */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.social-links img {
+    width: 40px;
+    height: 40px;
+    transition: 0.25s ease;
+}
+
+.social-links img:hover {
+    transform: scale(1.2);
+    filter: brightness(1.3);
+}
+
+/* COPYRIGHT */
+.footer-copy {
+    font-size: 14px;
+    opacity: 0.8;
 }
